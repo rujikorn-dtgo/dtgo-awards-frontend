@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  react-app-template:
+    container_name: react-app-template
+    image: react-app-template
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.react-app-template.rule=Host(`app-template-uat.dtgo.com`)
+      - traefik.http.routers.react-app-template.entrypoints=websecure
+      - traefik.http.routers.react-app-template.tls=true
+    build:
+      context: .
+      args:
+        - BUILD=uat
+    ports:
+      - 5100:5100
+
+networks:
+  default:
+    external: true
+    name: reverse-proxy

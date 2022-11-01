@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Sukhumvit';
+  font-style: normal;
+  font-weight: medium;
+  src: url('./assets/fonts/SukhumvitSet-Medium.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Sukhumvit';
+  font-style: normal;
+  font-weight: light;
+  src: url('./assets/fonts/SukhumvitSet-Light.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Sukhumvit';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./assets/fonts/SukhumvitSet-Bold.ttf') format('truetype')
+}
+
+* {
+  font-family: 'db-helvethaica-x';
+}
+
+body {
+  margin: 0;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-header {
+  background-image: url(./assets/images/h2.jpg);
+}
+
+
+select {
+  border-right: 16px solid transparent
+}
+
+.content-main {
+  margin-top: 20px;
+  padding: 0px 10% 0px 10%;
+}
+
+
+.ui-text-color-award {
+  letter-spacing: 0px;
+  color: #D59E2E;
+  opacity: 1;
+  font-family: 'Vinegar';
+
+
+}
+
+.font-db-helvethaica {
+  font-family: 'db-helvethaica-x';
+  color: #6D6D6D;
+}
+
+.border-yellow {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #D59E2E;
+  opacity: 1;
+}
+
+.border-yellow-mobile {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #D59E2E;
+  border-radius: 10px;
+  opacity: 1;
+}
+
+.text-yellow {
+  color: #D59E2E
+}
+
+#up-triangle {
+
+  width: 0;
+
+  height: 0;
+
+  border-bottom: 120px solid green;
+
+  border-left: 60px solid transparent;
+
+  border-right: 60px solid transparent;
+
+}
+
+.bg-sidebar {
+  background-color: #D59E2E;
+}
+
+.h-sidebar {
+  height: 72px;
+}
+
+.rounded-sideber {
+  border-top-left-radius: 40px;
+}
+
+.bg-sidebar-image {
+  width: 100%;
+  background-repeat: no-repeat, repeat;
+  background-image: url(./assets/images/sidebar-6.png);
+
+}
+
+.bg-sidebar-image-1 {
+  background-repeat: no-repeat;
+  height: 74.58px;
+  width: 274px;
+
+
+  background-image: url(https://sv1.picz.in.th/images/2022/10/26/vtMSVW.png);
+
+}
+
+.polygon-sidebar {
+  background-color: #5F4000;
+  clip-path: polygon(100% 46%, 84% 100%, 100% 100%);
+}
+
+.bg-color-dtgo-awards {
+
+  background-color: #D59E2E;
+}
+
+.rounded-blooming {
+  border-radius: 0px 40px 0px 40px;
+}
+
+.rounded-growing {
+  border-radius: 40px 0px 40px 0px;
+}
+
+.text-brown {
+  color: #5F4000;
+}
+
+.hoverMebottom:after {
+  position: absolute;
+  top: 100%;
+  right: 0%;
+  width: 0;
+  height: 3px;
+  background: #5F4000;
+  display: block;
+  content: '';
+  transition: width 0.5s ease-in-out;
+}
+
+.hoverMebottom:hover:after {
+  width: 100%;
+}
+
+.button {
+  position: relative;
+}
+
+.containerdiv {
+  border: 0;
+  float: left;
+  position: relative;
+}
+
+.myimg {
+  width: 200px;
+}
+
+
+.cornerimage {
+  border: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+}
+
+
+
+/* web */
+@media only screen and (min-width: 1024px) {}
+
+/* mobile */
+@media only screen and (max-width: 640px) {}
