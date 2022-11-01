@@ -1,34 +1,13 @@
-# # base image
-# FROM node:alpine
+FROM node:16-alpine
 
-# # set working directory
-# WORKDIR /code
-
-# # install and cache app dependencies
-# COPY package.json /code/
-# RUN npm install
-# COPY . /code/
-# EXPOSE 5000
-
-# # start app
-# CMD ["npm", "run", "uat"]
-
-
-# base image
-FROM node:alpine as build-stage
-# param from docker-compose
-ARG BUILD
-# set working directory
 WORKDIR /app
 
-# install and cache app dependencies
-COPY package.json /app/
-RUN npm install
-COPY ./ /app/
-RUN npm run $BUILD:build
+COPY package.json .
 
-FROM nginx:alpine
-COPY --from=build-stage /app/build/ /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN npm install --slient --loglevel=error
+RUN npm install react-scripts -g
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+COPY . ./
+EXPOSE 11010
+
+CMD ["npm", "run", "start"]

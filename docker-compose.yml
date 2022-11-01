@@ -1,12 +1,34 @@
-version: "3.9"
+version: '3.8'
 services:
-  react-app-template:
-    container_name: react-app-template
-    image: react-app-template
+  dtgo-award-app:
+    container_name: dtgo-award-app
+    image: dtgo-award-app:${REACT_APP_VERSION}
+    stdin_open: true
     restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      REACT_APP_NAME: ${REACT_APP_NAME}
+      REACT_APP_VERSION: ${REACT_APP_VERSION}
+      REACT_APP_TIMEOUT: ${REACT_APP_TIMEOUT}
     build:
       context: .
-      args:
-        - BUILD=local
+      dockerfile: Dockerfile
     ports:
-      - 5000:80
+      - ${PORT}:${PORT}
+    volumes:
+      - /app/node_modules
+      - .:/app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dtgo-award-app.rule=Host(`${HOST_NAME}`)
+      - traefik.http.routers.dtgo-award-app.entrypoints=websecure
+      - traefik.http.routers.dtgo-award-app.tls=true
+      - traefik.http.routers.dtgo-award-app.service=dtgo-award-app-service
+      - traefik.http.services.dtgo-award-app-service.loadbalancer.server.port=${PORT}
+
+networks:
+  default:
+    external: true
+    name: reverse-proxy
