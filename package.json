@@ -35,11 +35,10 @@
   },
   "scripts": {
     "start": "set PORT=11010 && react-scripts start",
-    "local": "env-cmd -f ./.env npm run start",
+    "local": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "semantic-ui-css-patch"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
