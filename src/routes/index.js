@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Route, Router, Switch } from 'react-router-dom'
 import history from 'core/history'
 
-import CreateRequest from 'routes/CreateRequest'
+// import CreateRequest from 'routes/CreateRequest'
 import Landing from 'routes/Landing'
-import TodoList from 'routes/ToDo'
-import TodoDetail from 'routes/ToDoDetail'
+// import TodoList from 'routes/ToDo'
+// import TodoDetail from 'routes/ToDoDetail'
 import NoMinees from 'routes/NoMinees'
 
-import CheckUpRequest from 'routes/CheckUpRequest'
+// import CheckUpRequest from 'routes/CheckUpRequest'
 
 export const rootPath = ''
 export const CreateRequestPath = `${rootPath}/createrequest`

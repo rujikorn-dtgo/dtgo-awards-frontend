@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, getFormValues, SubmissionError, Field } from 'redux-form'
+// import { reduxForm, getFormValues, SubmissionError, Field } from 'redux-form'
 
 
-import Img from 'react-image'
-import { Container, ContainerMain } from './styled'
 
-import NavBar from 'components/NavBar'
-import history from 'core/history'
-import { CheckUpRequestPath } from 'routes'
-import {
-  GoogleReCaptcha
-} from 'react-google-recaptcha-v3';
+import { Container } from './styled'
 
-import { getTextResult, textKey } from 'core/textResult'
-import { flush } from 'redux-saga/effects'
+
 import FooTer from 'components/FooTer'
 import { getChoiceAwards, getNomineesPage, getToken } from 'ducks/NoMinees'
 
@@ -28,18 +20,18 @@ const NoMinees = (props) => {
     getToken
   } = props
 
-  const [showNoMineesData, setShowNoMineesData] = useState({
-    bloomingGen: {
-      nominees: "",
-      nominators: ""
-    },
-    growingGen: {
-      nominees: "",
-      nominators: ""
-    }
+  // const [showNoMineesData, setShowNoMineesData] = useState({
+  //   bloomingGen: {
+  //     nominees: "",
+  //     nominators: ""
+  //   },
+  //   growingGen: {
+  //     nominees: "",
+  //     nominators: ""
+  //   }
 
-  }
-  )
+  // }
+  // )
 
   const goNomineesPage = (e, name) => {
     // console.log(e.target.value, 'value')
@@ -75,11 +67,11 @@ const NoMinees = (props) => {
 
 
 
-  const Dataload = async () => {
+  // const Dataload = async () => {
 
 
 
-  }
+  // }
   return (
     <Container>
 
