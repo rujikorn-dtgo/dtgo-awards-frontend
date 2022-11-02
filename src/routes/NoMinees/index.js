@@ -19,31 +19,33 @@ const NoMinees = (props) => {
     NoMineesData,
     getToken
   } = props
+  console.log(NoMineesData, 'NoMineesDatalog')
 
-  // const [showNoMineesData, setShowNoMineesData] = useState({
-  //   bloomingGen: {
-  //     nominees: "",
-  //     nominators: ""
-  //   },
-  //   growingGen: {
-  //     nominees: "",
-  //     nominators: ""
-  //   }
-
-  // }
+  const [datanominees, setdatanominees] = useState(""
+  )
+  const [blooming_gen, setblooming_gen] = useState({
+    nominees: "",
+    nominators: ""
+  }
+  )
+  const [bloming_detail, setbloming_detail] = useState([])
+  const [growing_gen, setgrowing_gen] = useState({
+    nominees: "",
+    nominators: ""
+  })
+  // const [datanominators, setdatanominators] = useState(""
   // )
-
   const goNomineesPage = (e, name) => {
     // console.log(e.target.value, 'value')
     // // setValues(e.target.value)
     // setValues(e.target.value)
-    console.log(e, 'eeee')
-    const data = getNomineesPage(e)
-    console.log(data, 'data')
-    console.log(NoMineesData, 'NoMineesData')
-    console.log(NoMineesData.bloomingGen.nominators, 'nominators')
-    console.log(NoMineesData.bloomingGen.nominees, 'nominees')
-    // setShowNoMineesData()
+    // console.log(e, 'eeee')
+    getNomineesPage(e)
+    // console.log(data, 'data')
+    // console.log(NoMineesData, 'NoMineesData')
+    // console.log(NoMineesData.bloomingGen.nominators, 'nominators')
+    // console.log(NoMineesData.bloomingGen.nominees, 'nominees')
+
   }
 
   useEffect(() => {
@@ -51,13 +53,39 @@ const NoMinees = (props) => {
     // console.log(getToken(), "token")
     // console.log(getComplainAll(),"getComplainAll")
     // Dataload()
-    console.log(getChoiceAwards(), 'getChoiceAwards')
+    if (localStorage.getItem('access_token') == null) {
+      getToken()
+      getChoiceAwards()
+    } else {
+      getChoiceAwards()
+    }
+    console.log(localStorage.getItem('access_token'), 'access_token')
+    // console.log(getChoiceAwards(), 'getChoiceAwards')
 
   }, [])
 
   useEffect(() => {
     // if (showNoMineesData) { setShowNoMineesData(NoMineesData) }
 
+    if (NoMineesData !== undefined && NoMineesData.length !== 0) {
+      console.log(NoMineesData, 'ef_NoMineesData')
+      // console.log(NoMineesData.bloomingGen.nominators, 'nominators')
+      // console.log(NoMineesData.bloomingGen.nominees, 'nominees')
+      // setblooming_gen(nominees:"",nominators:)
+      blooming_gen.nominees = NoMineesData.bloomingGen.nominees
+      blooming_gen.nominators = NoMineesData.bloomingGen.nominators
+
+      growing_gen.nominees = NoMineesData.growingGen.nominees
+      growing_gen.nominators = NoMineesData.growingGen.nominators
+      // console.log(NoMineesData.bloomingGen.nomineesDetails,'blooming_gen.nomineesDetails')
+      setbloming_detail(NoMineesData.bloomingGen.nomineesDetails)
+      setblooming_gen({
+        ...blooming_gen
+      })
+      setgrowing_gen({
+        ...growing_gen
+      })
+    }
   }, [NoMineesData])
 
 
@@ -169,53 +197,25 @@ const NoMinees = (props) => {
                 </div>
                 <div className='flex-col  w-1/2 bg-gray-200 rounded-l-full pl-3 py-2 border-r border-black'>
                   {/* {NoMineesData.bloomingGen.nominees} */}
-
                   Nominees :
-                  {NoMineesData.data ? NoMineesData.bloomingGen.nominees  : "0"}
+                  {blooming_gen.nominees ? blooming_gen.nominees : " 0 "}
                   {/* {NoMineesData.data ? NoMineesData.bloomingGen.nominees : "0"} */}
-                  {/* {NoMineesData ? showNoMineesData.bloomingGen.nominees : "0"} */}
+                  {/* {NoMineesData ? NoMineesData.bloomingGen.nominees : "0"} */}
                 </div>
                 <div className='flex-col  w-1/2  bg-gray-200 rounded-r-full pr-3 py-2'>
-                  Nominators : 2,500
+                  Nominators : {blooming_gen.nominators ? blooming_gen.nominators : " 0 "}
                 </div>
                 <div className='flex-col w-1/4 '>
 
                 </div>
               </div>
               {/* end-web */}
-              {/* <div className=' flex   text-xs  '>
 
-                <div className='flex-col w-1/2 ml-7  '>
-                  <div className="containerdiv ">
-                    <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                    <div className='  font-bold my-1'>
-                      Hathairat Jaroenkanjanapaisan
-                    </div>
-                    <div>
-                      หทัยรัตน์ เจริญกาญจนไพศาล
-                    </div>
-                  </div>
-                </div>
-                <div className='flex-col   w-1/2  mx-7'>
-                <div className="containerdiv ">
-                    <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                    <div className='  font-bold my-1'>
-                      Hathairat Jaroenkanjanapaisan
-                    </div>
-                    <div>
-                      หทัยรัตน์ เจริญกาญจนไพศาล
-                    </div>
-                  </div>
-                </div>
-
-              </div> */}
 
 
 
               <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
-
+                {console.log(bloming_detail,'bloming_detail')}
                 <div className="containerdiv  w-4/5  my-2 ">
                   <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
                   <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
@@ -281,10 +281,13 @@ const NoMinees = (props) => {
 
                 </div>
                 <div className='flex-col  w-1/2 bg-gray-200 rounded-l-full pl-3 py-2 border-r border-black'>
-                  Nominees : 1,500
+                  Nominees :
+                  {growing_gen.nominees ? growing_gen.nominees : " 0 "}
+
                 </div>
                 <div className='flex-col  w-1/2  bg-gray-200 rounded-r-full pr-3 py-2'>
-                  Nominators : 2,500
+                  Nominators :
+                  {growing_gen.nominators ? growing_gen.nominators : " 0 "}
                 </div>
                 <div className='flex-col w-1/4 '>
 
@@ -373,6 +376,8 @@ const NoMinees = (props) => {
 const mapStateToProps = (state) => {
   // var valueForm = getFormValues('formName')(state)
   console.log(state, 'state')
+  console.log(state.NoMinees.NoMineesData.data, 'NoMinees')
+
   return {
     //initial value form  
     ChoiceAwardsData: state.NoMinees.ChoiceAwardsData.data,
