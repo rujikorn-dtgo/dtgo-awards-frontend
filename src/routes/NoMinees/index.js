@@ -49,7 +49,7 @@ const NoMinees = (props) => {
   }
 
   useEffect(() => {
-    console.log(getToken(), 'getToken')
+    // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
     // console.log(getComplainAll(),"getComplainAll")
     // Dataload()
@@ -59,7 +59,7 @@ const NoMinees = (props) => {
     } else {
       getChoiceAwards()
     }
-    console.log(localStorage.getItem('access_token'), 'access_token')
+    // console.log(localStorage.getItem('access_token'), 'access_token')
     // console.log(getChoiceAwards(), 'getChoiceAwards')
 
   }, [])
@@ -215,7 +215,7 @@ const NoMinees = (props) => {
 
 
               <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
-                {console.log(bloming_detail,'bloming_detail')}
+                {console.log(bloming_detail, 'bloming_detail')}
                 <div className="containerdiv  w-4/5  my-2 ">
                   <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
                   <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
