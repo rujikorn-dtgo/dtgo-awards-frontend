@@ -16,7 +16,7 @@ import {
 import { getTextResult, textKey } from 'core/textResult'
 import { flush } from 'redux-saga/effects'
 import FooTer from 'components/FooTer'
-import { getChoiceAwards, getNomineesPage } from 'ducks/NoMinees'
+import { getChoiceAwards, getNomineesPage, getToken } from 'ducks/NoMinees'
 
 const NoMinees = (props) => {
   // console.log(props, 'propsssss')
@@ -24,7 +24,8 @@ const NoMinees = (props) => {
     getChoiceAwards,
     ChoiceAwardsData,
     getNomineesPage,
-    NoMineesData
+    NoMineesData,
+    getToken
   } = props
 
   const [showNoMineesData, setShowNoMineesData] = useState({
@@ -48,11 +49,13 @@ const NoMinees = (props) => {
     const data = getNomineesPage(e)
     console.log(data, 'data')
     console.log(NoMineesData, 'NoMineesData')
-    setShowNoMineesData.bloomingGen.nominees = NoMineesData.bloomingGen.nominees
+    console.log(NoMineesData.bloomingGen.nominators, 'nominators')
+    console.log(NoMineesData.bloomingGen.nominees, 'nominees')
     // setShowNoMineesData()
   }
 
   useEffect(() => {
+    console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
     // console.log(getComplainAll(),"getComplainAll")
     // Dataload()
@@ -61,9 +64,9 @@ const NoMinees = (props) => {
   }, [])
 
   useEffect(() => {
-    if (showNoMineesData) { setShowNoMineesData(NoMineesData) }
+    // if (showNoMineesData) { setShowNoMineesData(NoMineesData) }
 
-  }, [showNoMineesData])
+  }, [NoMineesData])
 
 
 
@@ -174,8 +177,11 @@ const NoMinees = (props) => {
                 </div>
                 <div className='flex-col  w-1/2 bg-gray-200 rounded-l-full pl-3 py-2 border-r border-black'>
                   {/* {NoMineesData.bloomingGen.nominees} */}
-                  Nominees : {NoMineesData.data ? NoMineesData.bloomingGen.nominees : "0"}
-                  {/* {showNoMineesData ? showNoMineesData.bloomingGen.nominees : "0"} */}
+
+                  Nominees :
+                  {NoMineesData.data ? NoMineesData.bloomingGen.nominees  : "0"}
+                  {/* {NoMineesData.data ? NoMineesData.bloomingGen.nominees : "0"} */}
+                  {/* {NoMineesData ? showNoMineesData.bloomingGen.nominees : "0"} */}
                 </div>
                 <div className='flex-col  w-1/2  bg-gray-200 rounded-r-full pr-3 py-2'>
                   Nominators : 2,500
@@ -387,7 +393,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getChoiceAwards,
-  getNomineesPage
+  getNomineesPage,
+  getToken
   // getComplainAll
 }
 

@@ -28,7 +28,7 @@ services:
       - traefik.http.routers.dtgo-award-app.service=dtgo-award-app-service
       - traefik.http.services.dtgo-award-app-service.loadbalancer.server.port=${PORT}
 
-networks:
-  default:
-    external: true
-    name: reverse-proxy
+# networks:
+#   default:
+#     external: true
+#     name: reverse-proxy

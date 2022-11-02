@@ -23,9 +23,9 @@ export const configureStore = initialState => {
   function* rootSaga() {
     yield all([
       watchApplicationSaga(),
-      watchToDoSaga(),
-      watchCreateRequestSaga(),
-      watchCheckUpRequestSaga(),
+      // watchToDoSaga(),
+      // watchCreateRequestSaga(),
+      // watchCheckUpRequestSaga(),
       watchNoMineesSaga()
     ])
   }

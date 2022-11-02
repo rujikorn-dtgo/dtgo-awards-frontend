@@ -45,10 +45,12 @@ axios.interceptors.request.use(config => {
   config = deepmerge(others, {
     headers: {
       // Authorization: `Bearer ${localStorage.getItem('accesstoken')}`,
-      authorization: `${localStorage.getItem('token')}`,
+      auth: `${localStorage.getItem('access_token')}`,
       Device: 'web',
       AppName: process.env.REACT_APP_NAME,
-      'Content-Type': contentType
+      'Content-Type': contentType,
+      'Access-Control-Allow-Origin': '*',
+      'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRldi1hd2FyZHNAZHRnby5jb20iLCJwYXNzd29yZCI6IkNiRzt4akpjXkYhV117dixgZVYyLlR5TFN1QSZNKiVOIn0.UXRY-Za5BFDgPBlgekVlADEurVzQ-EDlyKzOVlEg-jg',
     },
     params,
     timeout: (contentType === 'multipart/form-data') ? 0 : process.env.REACT_APP_TIMEOUT,
@@ -115,10 +117,9 @@ export const customHeader = {
   Platform: 'web',
 }
 
-// export const token = {
-//   'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMjItMDktMjggMTU6NDM6MyIsImlhdCI6MTY2NDM1NDU4MywiZXhwIjoxNjY0NDQwOTgzfQ.yz50ZsOCZXmrjrf18OrwGt7l2YlpEGYBC2y1V-a_3aY',
-//   'Content-Type': 'application/json'
-// }
+export const token = {
+  'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRldi1hd2FyZHNAZHRnby5jb20iLCJwYXNzd29yZCI6IkNiRzt4akpjXkYhV117dixgZVYyLlR5TFN1QSZNKiVOIn0.UXRY-Za5BFDgPBlgekVlADEurVzQ-EDlyKzOVlEg-jg',
+}
 
 // export const customHeader1 = (url, props = {}, headers = {
 //   Accept: 'application/json',
