@@ -48,16 +48,20 @@ const NoMinees = (props) => {
 
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
     // console.log(getComplainAll(),"getComplainAll")
     // Dataload()
+    console.log(localStorage.getItem('access_token') == null, 'access_token')
     if (localStorage.getItem('access_token') == null) {
-      getToken()
-      getChoiceAwards()
+      console.log('null')
+      await getToken()
+      window.location.reload()
+      await getChoiceAwards()
     } else {
-      getChoiceAwards()
+      await getChoiceAwards()
+      console.log('not null')
     }
     // console.log(localStorage.getItem('access_token'), 'access_token')
     // console.log(getChoiceAwards(), 'getChoiceAwards')
