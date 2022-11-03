@@ -49,21 +49,21 @@ const NoMinees = (props) => {
   }
 
   useEffect(async () => {
+    // getChoiceAwards()
     // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
-    // console.log(getComplainAll(),"getComplainAll")
-    // Dataload()
-    console.log(localStorage.getItem('access_token') == null, 'access_token')
-    if (localStorage.getItem('access_token') == null) {
-      console.log('null')
-      await getToken()
-      window.location.reload()
-      await getChoiceAwards()
+
+    console.log(localStorage.getItem('access_token') === null, 'access_token') //true
+    if (localStorage.getItem('access_token') === null) {
+      console.log('null') //แสดง
+      await getToken() //ไม่ทำ
+      refresh()
+    
     } else {
       await getChoiceAwards()
       console.log('not null')
     }
-    // console.log(localStorage.getItem('access_token'), 'access_token')
+    console.log(localStorage.getItem('access_token'), 'access_token')
     // console.log(getChoiceAwards(), 'getChoiceAwards')
 
   }, [])
@@ -92,7 +92,12 @@ const NoMinees = (props) => {
     }
   }, [NoMineesData])
 
-
+  const refresh = () => {
+    const timer = setTimeout(() => {
+      window.location.reload();
+      console.log('This will reload after 1 second!')
+    }, 1500);
+  }
 
 
 
@@ -298,34 +303,7 @@ const NoMinees = (props) => {
                 </div>
               </div>
               {/* end-web */}
-              {/* <div className=' flex   text-xs  '>
 
-                <div className='flex-col w-1/2 ml-7  '>
-                  <div className="containerdiv ">
-                    <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                    <div className='  font-bold my-1'>
-                      Hathairat Jaroenkanjanapaisan
-                    </div>
-                    <div>
-                      หทัยรัตน์ เจริญกาญจนไพศาล
-                    </div>
-                  </div>
-                </div>
-                <div className='flex-col   w-1/2  mx-7'>
-                <div className="containerdiv ">
-                    <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                    <div className='  font-bold my-1'>
-                      Hathairat Jaroenkanjanapaisan
-                    </div>
-                    <div>
-                      หทัยรัตน์ เจริญกาญจนไพศาล
-                    </div>
-                  </div>
-                </div>
-
-              </div> */}
 
 
 

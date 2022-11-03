@@ -64,10 +64,12 @@ const con_datetime_now = (date_ob) => {
 const GET_CHOICE_AWARDS = makeKeys('GET_CHOICE_AWARDS');
 const GET_NOMINEES_PAGE = makeKeys('GET_NOMINEE_PAGE');
 const GET_TOKEN = makeKeys('GET_TOKEN');
+const GEN_TOKEN = makeKeys('GEN_TOKEN');
 
 export const getChoiceAwards = makeAction(GET_CHOICE_AWARDS.REQUEST, 'data')
 export const getNomineesPage = makeAction(GET_NOMINEES_PAGE.REQUEST, 'id')
 export const getToken = makeAction(GET_TOKEN.REQUEST, 'data')
+export const genToken = makeAction(GEN_TOKEN.REQUEST, 'data')
 
 const getChoiceAwardsSuccess = makeAction(GET_CHOICE_AWARDS.SUCCESS, 'data')
 const getNomineesPageSuccess = makeAction(GET_NOMINEES_PAGE.SUCCESS, 'data')
@@ -102,7 +104,7 @@ function* getTokenRequest() {
   // console.log(data, 'getTokenRequest',)
   // console.log(serviceUrl,'serviceUrl')
   const date = con_date_now(new Date())
-
+  console.log("token")
   try {
     const response = yield httpGet(`/dtgo_award_api/access/oauth/token?type=get_client_credentials`)
     if (response.status >= 200 && response.status < 300) {
@@ -110,11 +112,43 @@ function* getTokenRequest() {
       // const date_stiamp = con_date_now(response.data.timeStamp)
       // console.log(date, 'date')
       // console.log(date_stiamp, 'time_stamp')
-
+      console.log(response.data,'response.data')
       localStorage.setItem('access_token', response.data.accessToken)
+      console.log(localStorage.getItem('access_token'),'access')
       // yield put(getChoiceAwardsSuccess(response.data))
     } else {
       //on fail
+      console.log("fail")
+      // yield put(getChoiceAwardsSuccess({}))
+    }
+  } catch (e) {
+    //on fail
+    console.log(e)
+    // yield put(getChoiceAwardsSuccess({}))
+  }
+}
+
+function* genTokenRequest() {
+  // const { data } = action.payload
+  // console.log(data, 'getTokenRequest',)
+  // console.log(serviceUrl,'serviceUrl')
+  const date = con_date_now(new Date())
+  console.log("token")
+  try {
+
+    const response = yield httpGet(`/dtgo_award_api/access/oauth/token?type=client_credentials`)
+    if (response.status >= 200 && response.status < 300) {
+      // //on success
+      // const date_stiamp = con_date_now(response.data.timeStamp)
+      // console.log(date, 'date')
+      // console.log(date_stiamp, 'time_stamp')
+      console.log(response.data,'response.data')
+      localStorage.setItem('access_token', response.data.accessToken)
+      console.log(localStorage.getItem('access_token'),'access')
+      // yield put(getChoiceAwardsSuccess(response.data))
+    } else {
+      //on fail
+      console.log("fail")
       // yield put(getChoiceAwardsSuccess({}))
     }
   } catch (e) {
@@ -150,6 +184,7 @@ export function* watchNoMineesSaga() {
   yield takeLatest(GET_CHOICE_AWARDS.REQUEST, getChoiceAwardsRequest)
   yield takeLatest(GET_NOMINEES_PAGE.REQUEST, getNoMineesPageRequest)
   yield takeLatest(GET_TOKEN.REQUEST, getTokenRequest)
+  yield takeLatest(GET_TOKEN.REQUEST, genTokenRequest)
 }
 
 const initial = {

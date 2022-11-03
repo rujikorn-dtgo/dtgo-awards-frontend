@@ -8,7 +8,7 @@ import Landing from 'routes/Landing'
 // import TodoList from 'routes/ToDo'
 // import TodoDetail from 'routes/ToDoDetail'
 import NoMinees from 'routes/NoMinees'
-
+import { getChoiceAwards, getToken } from 'ducks/NoMinees'
 // import CheckUpRequest from 'routes/CheckUpRequest'
 
 export const rootPath = ''
@@ -20,7 +20,40 @@ export const todoListPath = `${rootPath}/todo`
 export const CheckUpRequestPath = `${rootPath}/checkuprequest`
 export const todoDetailPath = (id) => `${rootPath}/todo/${id}`
 
+
+
 const ApplicationRoute = (props) => {
+  // const {
+  //   getToken
+  // } = props
+  // useEffect(async () => {
+  //   // console.log(getToken(), 'getToken')
+  //   // console.log(getToken(), "token")
+  //   // console.log(getComplainAll(),"getComplainAll")
+  //   // Dataload()
+  //   console.log(localStorage.getItem('access_token') === null, 'access_token')
+  //   if (localStorage.getItem('access_token') === null) {
+  //     console.log('null')
+  //     getToken()
+  //     console.log(getToken(), 'Token')
+  //     // console.log(localStorage.getItem('access_token'),'access_token')
+  //     // await refresh()
+  //     // getChoiceAwards()
+  //   } else {
+  //     getChoiceAwards()
+  //     console.log('not null')
+  //   }
+  //   // console.log(localStorage.getItem('access_token'), 'access_token')
+  //   // console.log(getChoiceAwards(), 'getChoiceAwards')
+
+  // }, [])
+
+  // const refresh = () => {
+  //   const timer = setTimeout(() => {
+  //     window.location.reload();
+  //     console.log('This will reload after 1 second!')
+  //   }, 1000);
+  // }
   return (
     <Router history={history}>
       {/* <Routes style={{ display: 'flex', flex: 1 }}> */}
@@ -45,9 +78,12 @@ const ApplicationRoute = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+  ChoiceAwardsData: state.NoMinees.ChoiceAwardsData.data,
 })
 
 const mapDispatchToProps = {
+  getChoiceAwards,
+  getToken
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationRoute)
