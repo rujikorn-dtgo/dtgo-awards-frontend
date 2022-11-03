@@ -8,7 +8,7 @@ import { Container } from './styled'
 
 
 import FooTer from 'components/FooTer'
-import { getChoiceAwards, getNomineesPage, getToken } from 'ducks/NoMinees'
+import { getChoiceAwards, getNomineesPage, getToken, genToken, con_date_now, con_datetime_now } from 'ducks/NoMinees'
 
 const NoMinees = (props) => {
   // console.log(props, 'propsssss')
@@ -17,7 +17,8 @@ const NoMinees = (props) => {
     ChoiceAwardsData,
     getNomineesPage,
     NoMineesData,
-    getToken
+    getToken,
+    genToken
   } = props
   console.log(NoMineesData, 'NoMineesDatalog')
 
@@ -54,16 +55,37 @@ const NoMinees = (props) => {
     // console.log(getToken(), "token")
 
     console.log(localStorage.getItem('access_token') === null, 'access_token') //true
+    const chktoken = localStorage.getItem('access_token') === null
     if (localStorage.getItem('access_token') === null) {
       console.log('null') //แสดง
       await getToken() //ไม่ทำ
       refresh()
-    
-    } else {
-      await getChoiceAwards()
-      console.log('not null')
+
     }
-    console.log(localStorage.getItem('access_token'), 'access_token')
+    // else if (chktoken === false  &&  localStorage.getItem('access_token') !== null){
+    //   await genToken()
+    //   // refresh()
+    // }
+    else {
+      const date = con_date_now(new Date())
+      const timeStamp = localStorage.getItem('date_stamp');
+
+      if(timeStamp < date){
+        await genToken()
+        console.log('genToken')
+        refresh()
+      }else{
+        await getChoiceAwards()
+      }
+      // await getChoiceAwards()
+
+      // console.log(localStorage.getItem('access_token'), 'access_token')
+      // console.log(localStorage.getItem('date_stamp'), 'time_stamp')
+      // console.log('not null')
+      // console.log('date_now', date)
+      // console.log(timeStamp < date, 'timeStamptimeStamp')
+    }
+    // console.log(localStorage.getItem('access_token'), 'access_token')
     // console.log(getChoiceAwards(), 'getChoiceAwards')
 
   }, [])
@@ -373,7 +395,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   getChoiceAwards,
   getNomineesPage,
-  getToken
+  getToken,
+  genToken
   // getComplainAll
 }
 

@@ -8,7 +8,7 @@ import {
   todoListPath
 } from 'routes'
 
-const con_date_now = (date_ob) => {
+export const con_date_now = (date_ob) => {
 
   let date = ("0" + date_ob.getDate()).slice(-2);
 
@@ -18,14 +18,6 @@ const con_date_now = (date_ob) => {
   // current year
   let year = date_ob.getFullYear();
 
-  // current hours
-  let hours = date_ob.getHours();
-
-  // current minutes
-  let minutes = date_ob.getMinutes();
-
-  // current seconds
-  let seconds = date_ob.getSeconds();
 
   const date_now = year + month + date;
 
@@ -35,7 +27,7 @@ const con_date_now = (date_ob) => {
 
 
 }
-const con_datetime_now = (date_ob) => {
+export const con_datetime_now = (date_ob) => {
 
   let date = ("0" + date_ob.getDate()).slice(-2);
 
@@ -103,18 +95,20 @@ function* getTokenRequest() {
   // const { data } = action.payload
   // console.log(data, 'getTokenRequest',)
   // console.log(serviceUrl,'serviceUrl')
-  const date = con_date_now(new Date())
+
   console.log("token")
   try {
     const response = yield httpGet(`/dtgo_award_api/access/oauth/token?type=get_client_credentials`)
     if (response.status >= 200 && response.status < 300) {
       // //on success
-      // const date_stiamp = con_date_now(response.data.timeStamp)
+      const date_stamp = con_date_now(response.data.timeStamp)
       // console.log(date, 'date')
-      // console.log(date_stiamp, 'time_stamp')
-      console.log(response.data,'response.data')
+
+      console.log(response.data, 'response.data')
+    
+      localStorage.setItem('date_stamp', date_stamp)
       localStorage.setItem('access_token', response.data.accessToken)
-      console.log(localStorage.getItem('access_token'),'access')
+      console.log(localStorage.getItem('access_token'), 'access')
       // yield put(getChoiceAwardsSuccess(response.data))
     } else {
       //on fail
@@ -132,19 +126,19 @@ function* genTokenRequest() {
   // const { data } = action.payload
   // console.log(data, 'getTokenRequest',)
   // console.log(serviceUrl,'serviceUrl')
-  const date = con_date_now(new Date())
+
   console.log("token")
   try {
 
     const response = yield httpGet(`/dtgo_award_api/access/oauth/token?type=client_credentials`)
     if (response.status >= 200 && response.status < 300) {
       // //on success
-      // const date_stiamp = con_date_now(response.data.timeStamp)
+      const date_stamp = con_date_now(response.data.timeStamp)
       // console.log(date, 'date')
       // console.log(date_stiamp, 'time_stamp')
-      console.log(response.data,'response.data')
+      localStorage.setItem('date_stamp', date_stamp)
       localStorage.setItem('access_token', response.data.accessToken)
-      console.log(localStorage.getItem('access_token'),'access')
+      console.log(localStorage.getItem('access_token'), 'access')
       // yield put(getChoiceAwardsSuccess(response.data))
     } else {
       //on fail
@@ -184,7 +178,7 @@ export function* watchNoMineesSaga() {
   yield takeLatest(GET_CHOICE_AWARDS.REQUEST, getChoiceAwardsRequest)
   yield takeLatest(GET_NOMINEES_PAGE.REQUEST, getNoMineesPageRequest)
   yield takeLatest(GET_TOKEN.REQUEST, getTokenRequest)
-  yield takeLatest(GET_TOKEN.REQUEST, genTokenRequest)
+  yield takeLatest(GEN_TOKEN.REQUEST, genTokenRequest)
 }
 
 const initial = {
