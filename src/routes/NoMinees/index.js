@@ -37,15 +37,9 @@ const NoMinees = (props) => {
   // const [datanominators, setdatanominators] = useState(""
   // )
   const goNomineesPage = (e, name) => {
-    // console.log(e.target.value, 'value')
-    // // setValues(e.target.value)
-    // setValues(e.target.value)
-    // console.log(e, 'eeee')
+
     getNomineesPage(e)
-    // console.log(data, 'data')
-    // console.log(NoMineesData, 'NoMineesData')
-    // console.log(NoMineesData.bloomingGen.nominators, 'nominators')
-    // console.log(NoMineesData.bloomingGen.nominees, 'nominees')
+
 
   }
 
@@ -76,6 +70,7 @@ const NoMinees = (props) => {
         refresh()
       }else{
         await getChoiceAwards()
+        getNomineesPage("1")
       }
       // await getChoiceAwards()
 
