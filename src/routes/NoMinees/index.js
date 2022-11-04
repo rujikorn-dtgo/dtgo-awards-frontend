@@ -24,12 +24,20 @@ const NoMinees = (props) => {
 
   const [datanominees, setdatanominees] = useState(""
   )
+
+  const [choice_detail, setchoice_detail] = useState({
+    nameEn: "",
+    nameTh: ""
+  }
+  )
   const [blooming_gen, setblooming_gen] = useState({
     nominees: "",
     nominators: ""
   }
+
   )
   const [bloming_detail, setbloming_detail] = useState([])
+  const [growing_detail, setgrowing_detail] = useState([])
   const [growing_gen, setgrowing_gen] = useState({
     nominees: "",
     nominators: ""
@@ -60,17 +68,17 @@ const NoMinees = (props) => {
     //   await genToken()
     //   // refresh()
     // }
+
     else {
       const date = con_date_now(new Date())
       const timeStamp = localStorage.getItem('date_stamp');
-
-      if(timeStamp < date){
+      if (timeStamp <= date) {
         await genToken()
         console.log('genToken')
         refresh()
-      }else{
+      } else {
         await getChoiceAwards()
-        getNomineesPage("1")
+        getNomineesPage("5")
       }
       // await getChoiceAwards()
 
@@ -98,8 +106,14 @@ const NoMinees = (props) => {
 
       growing_gen.nominees = NoMineesData.growingGen.nominees
       growing_gen.nominators = NoMineesData.growingGen.nominators
-      // console.log(NoMineesData.bloomingGen.nomineesDetails,'blooming_gen.nomineesDetails')
+
+      choice_detail.nameEn = NoMineesData.choiceDetail.nameEn
+      choice_detail.nameTh = NoMineesData.choiceDetail.nameTh
+      setchoice_detail({
+        ...choice_detail
+      })
       setbloming_detail(NoMineesData.bloomingGen.nomineesDetails)
+      setgrowing_detail(NoMineesData.growingGen.nomineesDetails)
       setblooming_gen({
         ...blooming_gen
       })
@@ -144,16 +158,27 @@ const NoMinees = (props) => {
           Nominees for DTGO Awards <br className='lg:hidden'></br> 2022
         </div>
 
-        <div className='text-center   font-db-helvethaica  lg:text-base text-xs mb-6'>
-          The member who brings happiness whenever they go
+        <div className='text-center   font-db-helvethaica  lg:text-base text-xs mb-6 '>
+          <div>
+            {choice_detail.nameEn ? choice_detail.nameEn : ""}
+          </div>
+
+          <div className='mx-4'>
+            {choice_detail.nameTh ? choice_detail.nameTh : ""}
+          </div>
+
         </div>
 
         {/* mobile */}
-        <div className='mx-4 mb-4 lg:hidden   '>
-          <select className='w-full bg-white border-yellow  h-11 rounded-full  pl-5 pr-3  outline-none text-yellow text-base '  >
-            <option value="" className=' broder-2 border-yellow'>1. DTGO Happiness Hero Award </option>
-            <option value="">2</option>
-            <option value="">--------------------</option>
+        <div className='mx-4 mb-4 lg:hidden '>
+          <select className='w-full bg-white border-yellow  h-11 rounded-full  pl-5 pr-3  outline-none text-yellow text-base ' onChange={(e) => goNomineesPage(e.target.value)} >
+            {ChoiceAwardsData ? ChoiceAwardsData.map((p, index) => (
+              <option value={p.no} className=' broder-2 border-yellow'>{p.no}. {p.name}
+              </option>
+            ))
+              :
+              ""}
+
           </select>
 
 
@@ -161,20 +186,22 @@ const NoMinees = (props) => {
 
             <div className=' flex-col w-1/2  text-left '>
               <div>
-                Nominees : 1,500
+                Nominees :{blooming_gen.nominees ? blooming_gen.nominees : " 0 "}
 
               </div>
               <div>
-                Nominators : 2,500
+                Nominators : {blooming_gen.nominators ? blooming_gen.nominators : " 0 "}
               </div>
 
             </div>
             <div className=' flex-col w-1/2 text-right'>
               <div>
-                Nominees : 1,500
+                Nominees :
+                {growing_gen.nominees ? growing_gen.nominees : " 0 "}
               </div>
               <div>
-                Nominators : 2,500
+                Nominators :
+                {growing_gen.nominators ? growing_gen.nominators : " 0 "}
               </div>
 
             </div>
@@ -242,49 +269,22 @@ const NoMinees = (props) => {
 
               <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
                 {console.log(bloming_detail, 'bloming_detail')}
-                <div className="containerdiv  w-4/5  my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                  <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                  <div className='  font-bold my-1'>
-                    Hathairat Jaroenkanjanapaisan
-                  </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
 
-                <div className="containerdiv w-4/5 my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                  <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                  <div className='  font-bold my-1'>
-                    Hathairat Jaroenkanjanapaisan
+                {bloming_detail ? bloming_detail.map((p, index) => (
+                  <div className="containerdiv   w-4/5  my-2 ">
+                    <img className="myimg  resize-img" src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
+                    <div className='  font-bold my-1'>
+                      {p.nameEn}
+                    </div>
+                    <div>
+                      {p.nameTh}
+                    </div>
                   </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
+                ))
+                  :
+                  ""}
 
-                <div className="containerdiv w-4/5 my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                  <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                  <div className='  font-bold my-1'>
-                    Hathairat Jaroenkanjanapaisan
-                  </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
-
-                <div className="containerdiv w-4/5 my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                  <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                  <div className='  font-bold my-1'>
-                    Hathairat Jaroenkanjanapaisan
-                  </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
 
 
               </div>
@@ -326,18 +326,22 @@ const NoMinees = (props) => {
 
               <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
 
-                <div className="containerdiv  w-4/5  my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
-                  <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
-                  <div className='  font-bold my-1'>
-                    Hathairat Jaroenkanjanapaisan
+                {growing_detail ? growing_detail.map((p, index) => (
+                  <div className="containerdiv  w-4/5  my-2    " >
+                    <img className="myimg resize-img  " src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
+                    <div className='  font-bold my-1'>
+                      {p.nameEn}
+                    </div>
+                    <div>
+                      {p.nameTh}
+                    </div>
                   </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
+                ))
+                  :
+                  ""}
 
-                <div className="containerdiv w-4/5 my-2 ">
+                {/* <div className="containerdiv w-4/5 my-2 ">
                   <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
                   <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
                   <div className='  font-bold my-1'>
@@ -346,7 +350,7 @@ const NoMinees = (props) => {
                   <div>
                     หทัยรัตน์ เจริญกาญจนไพศาล
                   </div>
-                </div>
+                </div> */}
 
 
 

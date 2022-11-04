@@ -32,6 +32,7 @@ body {
 
 }
 
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -176,8 +177,13 @@ select {
 
 .myimg {
   width: 100%;
+
 }
 
+.bg-img {
+  background-repeat: no-repeat;
+  background-image: url(https://rfid.koder3.com/mask.png);
+}
 
 .cornerimage {
   border: 0;
@@ -187,10 +193,40 @@ select {
   width: auto;
 }
 
+@layer components {
+
+
+
+  /* .resize-img {
+    max-height: 145px ;
+  } */
+
+  /* .resize-img-sm {
+    width: 273px;
+    height: 273px;
+  } */
+}
+
+
+
+
 
 
 /* web */
-@media only screen and (min-width: 1024px) {}
+@media only screen and (min-width: 1280px) {
+  .resize-img {
+    max-height: 273px;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  .resize-img {
+    max-height: 145px;
+  }
+}
 
 /* mobile */
-@media only screen and (max-width: 640px) {}
+@media only screen and (max-width: 640px) {
+  /* .resize-img {
+    max-height: 273px;
+  } */
+}
