@@ -85,7 +85,31 @@ function* getNoMineesPageRequest(action) {
       yield put(getNomineesPageSuccess({}))
     }
   } catch (e) {
-    //on fail
+    if (e.status == 500) {
+      try {
+        const response_ = yield httpGet(`/dtgo_award_api/access/oauth/token?type=client_credentials`)
+        if (response_.status >= 200 && response_.status < 300) {
+          // //on success
+          const date_stamp = con_date_now(response_.data.timeStamp)
+          // console.log(date, 'date')
+          // console.log(date_stiamp, 'time_stamp')
+          localStorage.setItem('date_stamp', date_stamp)
+          localStorage.setItem('access_token', response_.data.accessToken)
+          console.log(localStorage.getItem('access_token'), 'access')
+          // yield put(getChoiceAwardsSuccess(response.data))
+        } else {
+          //on fail
+          console.log("fail")
+          // yield put(getChoiceAwardsSuccess({}))
+        }
+      } catch (e) {
+        //on fail
+        console.log(e)
+        // yield put(getChoiceAwardsSuccess({}))
+      }
+    } else {
+      console.log(e)
+    }
     console.log(e)
     yield put(getNomineesPageSuccess({}))
   }
@@ -167,32 +191,7 @@ function* getChoiceAwardsRequest(action) {
     }
   } catch (e) {
     //on fail
-    // if (response.status == 500 ||response.status == 500  ) {
-    //   try {
-    //     const response_ = yield httpGet(`/dtgo_award_api/access/oauth/token?type=client_credentials`)
-    //     if (response_.status >= 200 && response_.status < 300) {
-    //       // //on success
-    //       const date_stamp = con_date_now(response_.data.timeStamp)
-    //       // console.log(date, 'date')
-    //       // console.log(date_stiamp, 'time_stamp')
-    //       localStorage.setItem('date_stamp', date_stamp)
-    //       localStorage.setItem('access_token', response_.data.accessToken)
-    //       console.log(localStorage.getItem('access_token'), 'access')
-    //       // yield put(getChoiceAwardsSuccess(response.data))
-    //     } else {
-    //       //on fail
-    //       console.log("fail")
-    //       // yield put(getChoiceAwardsSuccess({}))
-    //     }
-    //   } catch (e) {
-    //     //on fail
-    //     console.log(e)
-    //     // yield put(getChoiceAwardsSuccess({}))
-    //   }
-    // } else {
-    //   console.log(e)
-    // }
-    console.log(e)
+  
     yield put(getChoiceAwardsSuccess({}))
   }
 }

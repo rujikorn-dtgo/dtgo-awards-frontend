@@ -59,6 +59,8 @@ const NoMinees = (props) => {
     console.log(localStorage.getItem('access_token') === null, 'access_token') //true
     const chktoken = localStorage.getItem('access_token') === null
     if (localStorage.getItem('access_token') === null) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('date_stamp')
       console.log('null') //แสดง
       await getToken() //ไม่ทำ
       refresh()
@@ -70,6 +72,7 @@ const NoMinees = (props) => {
     // }
 
     else {
+      
       const date = con_date_now(new Date())
       const timeStamp = localStorage.getItem('date_stamp');
       if (timeStamp <= date) {
@@ -77,7 +80,8 @@ const NoMinees = (props) => {
         console.log('genToken')
         refresh()
       } else {
-        await getChoiceAwards()
+        const chk1 = await getChoiceAwards()
+        console.log(chk1, 'chk1')
         getNomineesPage("1")
       }
       // await getChoiceAwards()
@@ -280,7 +284,7 @@ const NoMinees = (props) => {
 
                 {bloming_detail ? bloming_detail.map((p, index) => (
                   <div className="containerdiv   w-4/5  my-2 ">
-                    <img className="myimg  resize-img" src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="myimg  resize-img" src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
                     <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" />
                     <div className='  font-bold my-1'>
                       {p.nameEn}
@@ -333,7 +337,7 @@ const NoMinees = (props) => {
 
                 {growing_detail ? growing_detail.map((p, index) => (
                   <div className="containerdiv  w-4/5  my-2    " >
-                    <img className="myimg resize-img  " src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="myimg resize-img  " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
                     <img className="cornerimage " src="https://rfid.koder3.com/mask.png" alt="" />
                     <div className='  font-bold my-1'>
                       {p.nameEn}
