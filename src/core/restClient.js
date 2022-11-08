@@ -55,8 +55,11 @@ axios.interceptors.request.use(config => {
     params,
     timeout: (contentType === 'multipart/form-data') ? 0 : process.env.REACT_APP_TIMEOUT,
     data: data !== undefined ? data.props : data
-  })
-
+    
+  }
+  
+  )
+console.log(config,'console.log(config)')
   // Convert to FormData
   if (contentType === 'multipart/form-data') {
     if (Object.keys(data.props).length > 0) {

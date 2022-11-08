@@ -8,7 +8,7 @@ import { Container } from './styled'
 
 
 import FooTer from 'components/FooTer'
-import { getChoiceAwards, getNomineesPage, getToken, genToken, con_date_now, con_datetime_now } from 'ducks/NoMinees'
+import { getChoiceAwards, getNomineesPage, getToken, genToken, con_date_now, con_datetime_now  } from 'ducks/NoMinees'
 
 const NoMinees = (props) => {
   // console.log(props, 'propsssss')
@@ -51,60 +51,47 @@ const NoMinees = (props) => {
 
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     // getChoiceAwards()
     // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
+    getToken() //ไม่ทำ
+    // refresh()
+    const date = con_date_now(new Date())
+    console.log(typeof date, date, 'date')//20111108
+    // const timeStamp = localStorage.getItem('date_stamp');
+    // console.log(typeof timeStamp, timeStamp, 'timeStamp')//20111109
 
-    console.log(localStorage.getItem('access_token') === null, 'access_token') //true
-    const chktoken = localStorage.getItem('access_token') === null
-    if (localStorage.getItem('access_token') === null) {
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('date_stamp')
-      console.log('null') //แสดง
-      await getToken() //ไม่ทำ
+    const time = localStorage.getItem("date_stamp");
+    const timeStamp = new Date(time);
+    const currentTime = new Date();
+    const date1 = timeStamp.getDate()
+    const date2 = currentTime.getDate()
+
+
+    console.log(date2,(date1),(date1-1),'(date1-1)')
+    if (date2 == (date1-1)) {
+      getToken()
+      const chk1 = getChoiceAwards()
+      console.log(chk1, 'chk1')
+      getNomineesPage("1")
+    } else {
+      genToken()
+      console.log('genToken')
       refresh()
-
     }
-    // else if (chktoken === false  &&  localStorage.getItem('access_token') !== null){
-    //   await genToken()
-    //   // refresh()
-    // }
 
-    else {
-      
-      const date = con_date_now(new Date())
-      const timeStamp = localStorage.getItem('date_stamp');
-      if (timeStamp <= date) {
-        await genToken()
-        console.log('genToken')
-        refresh()
-      } else {
-        const chk1 = await getChoiceAwards()
-        console.log(chk1, 'chk1')
-        getNomineesPage("1")
-      }
-      // await getChoiceAwards()
 
-      // console.log(localStorage.getItem('access_token'), 'access_token')
-      // console.log(localStorage.getItem('date_stamp'), 'time_stamp')
-      // console.log('not null')
-      // console.log('date_now', date)
-      // console.log(timeStamp < date, 'timeStamptimeStamp')
-    }
-    // console.log(localStorage.getItem('access_token'), 'access_token')
-    // console.log(getChoiceAwards(), 'getChoiceAwards')
+
 
   }, [])
 
   useEffect(() => {
-    // if (showNoMineesData) { setShowNoMineesData(NoMineesData) }
+
 
     if (NoMineesData !== undefined && NoMineesData.length !== 0) {
       console.log(NoMineesData, 'ef_NoMineesData')
-      // console.log(NoMineesData.bloomingGen.nominators, 'nominators')
-      // console.log(NoMineesData.bloomingGen.nominees, 'nominees')
-      // setblooming_gen(nominees:"",nominators:)
+
       blooming_gen.nominees = NoMineesData.bloomingGen.nominees
       blooming_gen.nominators = NoMineesData.bloomingGen.nominators
 
@@ -131,7 +118,7 @@ const NoMinees = (props) => {
     const timer = setTimeout(() => {
       window.location.reload();
       console.log('This will reload after 1 second!')
-    }, 1500);
+    }, 2000);
   }
 
   // const sizeimg = (e) => {
