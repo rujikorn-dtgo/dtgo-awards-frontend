@@ -78,7 +78,7 @@ const NoMinees = (props) => {
         refresh()
       } else {
         await getChoiceAwards()
-        getNomineesPage("5")
+        getNomineesPage("1")
       }
       // await getChoiceAwards()
 
@@ -130,8 +130,16 @@ const NoMinees = (props) => {
     }, 1500);
   }
 
-
-
+  // const sizeimg = (e) => {
+  //   const timer = setTimeout(() => {
+  //     window.location.reload();
+  //     console.log('This will reload after 1 second!')
+  //   }, 1500);
+  // }
+  // img.onload = function() {
+  //   alert(this.width + 'x' + this.height);
+  // }
+  // img.src = 'http://www.google.com/intl/en_ALL/images/logo.gif';
 
 
 
@@ -273,7 +281,7 @@ const NoMinees = (props) => {
                 {bloming_detail ? bloming_detail.map((p, index) => (
                   <div className="containerdiv   w-4/5  my-2 ">
                     <img className="myimg  resize-img" src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
+                    <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" />
                     <div className='  font-bold my-1'>
                       {p.nameEn}
                     </div>
@@ -321,15 +329,12 @@ const NoMinees = (props) => {
               </div>
               {/* end-web */}
 
-
-
-
               <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
 
                 {growing_detail ? growing_detail.map((p, index) => (
                   <div className="containerdiv  w-4/5  my-2    " >
                     <img className="myimg resize-img  " src={p.picUrl !== null ? p.picUrl  :"https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
-                    <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
+                    <img className="cornerimage " src="https://rfid.koder3.com/mask.png" alt="" />
                     <div className='  font-bold my-1'>
                       {p.nameEn}
                     </div>
