@@ -136,7 +136,7 @@ useEffect(()=>{
     const timer = setTimeout(() => {
       window.location.reload();
       console.log('This will reload after 1 second!')
-    }, 2000);
+    }, 45000);
   }
 
   // const sizeimg = (e) => {
@@ -289,7 +289,7 @@ useEffect(()=>{
 
                 {bloming_detail ? bloming_detail.map((p, index) => (
                   <div className="containerdiv   w-4/5  my-2  ">
-                    <img className="myimg  resize-img rounded-full " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="myimg  resize-img rounded-full  " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
                     {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
                     <div className='  font-bold my-1'>
                       {p.nameEn}
