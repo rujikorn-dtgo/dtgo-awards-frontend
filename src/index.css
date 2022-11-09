@@ -222,8 +222,8 @@ select {
 
 @media only screen and (max-width: 1280px) and (min-width: 640px) {
   .resize-img {
-    max-height: 145px;
-    min-height: 145px;
+    max-height: 140px;
+    min-height: 140px;
   }
 }
 

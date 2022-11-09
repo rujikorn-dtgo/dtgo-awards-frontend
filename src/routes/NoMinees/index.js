@@ -270,8 +270,8 @@ const NoMinees = (props) => {
                 {console.log(bloming_detail, 'bloming_detail')}
 
                 {bloming_detail ? bloming_detail.map((p, index) => (
-                  <div className="containerdiv   w-4/5  my-2 ">
-                    <img className="myimg  resize-img" src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                  <div className="containerdiv   w-4/5  my-2  ">
+                    <img className="myimg  resize-img rounded-full " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
                     {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
                     <div className='  font-bold my-1'>
                       {p.nameEn}
@@ -324,7 +324,7 @@ const NoMinees = (props) => {
 
                 {growing_detail ? growing_detail.map((p, index) => (
                   <div className="containerdiv  w-4/5  my-2    " >
-                    <img className="myimg resize-img  " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/10/27/v1F1an.png"} alt="img" />
+                    <img className="myimg resize-img rounded-full  " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg"} alt="img" />
                     {/* <img className="cornerimage " src="https://rfid.koder3.com/mask.png" alt="" /> */}
                     <div className='  font-bold my-1'>
                       {p.nameEn}
@@ -338,7 +338,7 @@ const NoMinees = (props) => {
                   ""}
 
                 {/* <div className="containerdiv w-4/5 my-2 ">
-                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/10/27/v1F1an.png" alt="img" />
+                  <img className="myimg" src="https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg" alt="img" />
                   <img className="cornerimage" src="https://rfid.koder3.com/mask.png" alt="" />
                   <div className='  font-bold my-1'>
                     Hathairat Jaroenkanjanapaisan
