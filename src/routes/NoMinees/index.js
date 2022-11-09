@@ -44,18 +44,36 @@ const NoMinees = (props) => {
   })
   // const [datanominators, setdatanominators] = useState(""
   // )
-  const goNomineesPage = (e, name) => {
-
-    getNomineesPage(e)
-
-
+  const [number ,setNumber]=useState(1)
+  const [myInterval ,setMyInterval]=useState(null)
+ 
+  const goNomineesPage = async (e, name) => {
+    await getNomineesPage(e)
+    setNumber(e)
+    // getNomineesPage(e)
+   
+  
   }
+useEffect(()=>{
+  if(myInterval){
+    clearInterval(myInterval) 
+  }
+ let  myInterval_ = setInterval(async() => {
+    console.log(number)
+
+   await getNomineesPage(number)
+      console.log(number)
+    }, 10000);
+   
+    setMyInterval(myInterval_)
+},[number])
 
   useEffect(() => {
     // getChoiceAwards()
     // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
     // refresh()
+ 
     const date = con_date_now(new Date())
     console.log(typeof date, date, 'date')//20111108
     // const timeStamp = localStorage.getItem('date_stamp');
@@ -66,7 +84,6 @@ const NoMinees = (props) => {
     // const currentTime = new Date();
     // const date1 = timeStamp.getDate()
     // const date2 = currentTime.getDate()
-
 
     // console.log(date2,(date1),(date1-1),'(date1-1)')
     // if (date2 == (date1-1)) {
