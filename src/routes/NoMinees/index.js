@@ -55,32 +55,33 @@ const NoMinees = (props) => {
     // getChoiceAwards()
     // console.log(getToken(), 'getToken')
     // console.log(getToken(), "token")
-    getToken() //ไม่ทำ
     // refresh()
     const date = con_date_now(new Date())
     console.log(typeof date, date, 'date')//20111108
     // const timeStamp = localStorage.getItem('date_stamp');
     // console.log(typeof timeStamp, timeStamp, 'timeStamp')//20111109
 
-    const time = localStorage.getItem("date_stamp");
-    const timeStamp = new Date(time);
-    const currentTime = new Date();
-    const date1 = timeStamp.getDate()
-    const date2 = currentTime.getDate()
+    // const time = localStorage.getItem("date_stamp");
+    // const timeStamp = new Date(time);
+    // const currentTime = new Date();
+    // const date1 = timeStamp.getDate()
+    // const date2 = currentTime.getDate()
 
 
-    console.log(date2,(date1),(date1-1),'(date1-1)')
-    if (date2 == (date1-1)) {
-      getToken()
-      const chk1 = getChoiceAwards()
-      console.log(chk1, 'chk1')
-      getNomineesPage("1")
-    } else {
-      genToken()
-      console.log('genToken')
-      refresh()
-    }
-
+    // console.log(date2,(date1),(date1-1),'(date1-1)')
+    // if (date2 == (date1-1)) {
+    //   getToken()
+    //   const chk1 = getChoiceAwards()
+    //   console.log(chk1, 'chk1')
+    //   getNomineesPage("1")
+    // } else {
+    //   genToken()
+    //   console.log('genToken')
+    //   refresh()
+    // }
+    const chk1 = getChoiceAwards()
+    console.log(chk1, 'chk1')
+    getNomineesPage("1")
 
 
 

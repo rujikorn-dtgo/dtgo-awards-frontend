@@ -45,7 +45,7 @@ axios.interceptors.request.use(config => {
   config = deepmerge(others, {
     headers: {
       // Authorization: `Bearer ${localStorage.getItem('accesstoken')}`,
-      auth: `${localStorage.getItem('access_token')}`,
+      // auth: `${localStorage.getItem('access_token')}`,
       Device: 'web',
       AppName: process.env.REACT_APP_NAME,
       'Content-Type': contentType,
