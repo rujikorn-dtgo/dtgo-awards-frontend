@@ -63,7 +63,7 @@ useEffect(()=>{
 
    await getNomineesPage(number)
       console.log(number)
-    }, 45000);
+    }, 180000);
    
     setMyInterval(myInterval_)
 },[number])
