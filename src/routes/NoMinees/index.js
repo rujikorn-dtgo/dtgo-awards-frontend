@@ -54,19 +54,20 @@ const NoMinees = (props) => {
    
   
   }
-useEffect(()=>{
-  if(myInterval){
-    clearInterval(myInterval) 
-  }
- let  myInterval_ = setInterval(async() => {
-    console.log(number)
+  
+// useEffect(()=>{
+//   if(myInterval){
+//     clearInterval(myInterval) 
+//   }
+//  let  myInterval_ = setInterval(async() => {
+//     console.log(number)
 
-   await getNomineesPage(number)
-      console.log(number)
-    }, 180000);
+//    await getNomineesPage(number)
+//       console.log(number)
+//     }, 180000);
    
-    setMyInterval(myInterval_)
-},[number])
+//     setMyInterval(myInterval_)
+// },[number])
 
   useEffect(() => {
     // getChoiceAwards()
