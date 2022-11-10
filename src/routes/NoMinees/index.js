@@ -63,7 +63,7 @@ useEffect(()=>{
 
    await getNomineesPage(number)
       console.log(number)
-    }, 10000);
+    }, 180000);
    
     setMyInterval(myInterval_)
 },[number])
@@ -136,7 +136,7 @@ useEffect(()=>{
     const timer = setTimeout(() => {
       window.location.reload();
       console.log('This will reload after 1 second!')
-    }, 45000);
+    }, 180000);
   }
 
   // const sizeimg = (e) => {
