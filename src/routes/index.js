@@ -8,6 +8,7 @@ import Landing from 'routes/Landing'
 // import TodoList from 'routes/ToDo'
 // import TodoDetail from 'routes/ToDoDetail'
 import NoMinees from 'routes/NoMinees'
+import Voting from 'routes/Voting'
 import { getChoiceAwards, getToken } from 'ducks/NoMinees'
 // import CheckUpRequest from 'routes/CheckUpRequest'
 
@@ -16,8 +17,10 @@ export const CreateRequestPath = `${rootPath}/createrequest`
 export const landingPath = `${rootPath}/`
 export const noMineesPath = `${rootPath}/Nominees`
 export const todoListPath = `${rootPath}/todo`
+export const voTingPath = `${rootPath}/Voting`
 
 export const CheckUpRequestPath = `${rootPath}/checkuprequest`
+
 export const todoDetailPath = (id) => `${rootPath}/todo/${id}`
 
 
@@ -68,6 +71,7 @@ const ApplicationRoute = (props) => {
         {/* <Route exact strict path={todoListPath} component={TodoList} key='TodoList' /> */}
         {/* <Route exact strict path={CheckUpRequestPath} component={CheckUpRequest} key='CheckUpRequest' /> */}
         <Route exact strict path={noMineesPath} component={NoMinees} key='NoMinees' />
+        <Route exact strict path={voTingPath} component={Voting} key='Voting' />
         <Switch>
           {/* <Route exact strict path={todoDetailPath(':id')} component={TodoDetail} key='TodoDetail' /> */}
         </Switch>
