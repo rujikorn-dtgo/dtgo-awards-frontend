@@ -136,48 +136,7 @@ const Voting = (props) => {
 
         </div>
 
-        {/* mobile */}
-        <div className='mx-4 mb-4 lg:hidden '>
-          <select className='w-full bg-white border-yellow  h-11 rounded-full  pl-5 pr-3  outline-none text-yellow text-base ' onChange={(e) => goNomineesPage(e.target.value)} >
-            {ChoiceAwardsData ? ChoiceAwardsData.map((p, index) => (
-              <option value={p.no} className=' broder-2 border-yellow'>{p.no}. {p.name}
-              </option>
-            ))
-              :
-              ""}
 
-          </select>
-
-
-          <div className='flex mt-4  mx-4 text-brown text-sm'>
-
-            <div className=' flex-col w-1/2  text-left '>
-              <div>
-                Nominees :{blooming_gen.nominees ? blooming_gen.nominees : " 0 "}
-
-              </div>
-              <div>
-                Nominators : {blooming_gen.nominators ? blooming_gen.nominators : " 0 "}
-              </div>
-
-            </div>
-            <div className=' flex-col w-1/2 text-right'>
-              <div>
-                Nominees :
-                {growing_gen.nominees ? growing_gen.nominees : " 0 "}
-              </div>
-              <div>
-                Nominators :
-                {growing_gen.nominators ? growing_gen.nominators : " 0 "}
-              </div>
-
-            </div>
-
-
-
-          </div>
-        </div>
-        {/* end-mobile */}
 
         <div className='  w-full  h-max flex font-db-helvethaica '>
           {/* web */}
@@ -209,7 +168,7 @@ const Voting = (props) => {
                 </div>
               </div>
             </div>
-            <div className='mt-10 h-full mb-20'>
+            <div className='lg:mt-10 my-2 h-full mb-20'>
               {/* web */}
               <div className=' lg:flex hidden  w-full my-5 text-xs font-bold text-brown  text-center      '>
 
@@ -220,9 +179,21 @@ const Voting = (props) => {
 
 
               </div>
+
               {/* end-web */}
 
-              <div class="flex flex-col">
+              {/* mobile */}
+              <div className='  flex  w-full my-5 text-xs font-bold text-brown  text-center   lg:hidden     '>
+
+                <div className='flex-col text-center  w-full mx-10   bg-gray-200 rounded-full pl-3 py-2 '>
+                  {blooming_gen.nominees ? blooming_gen.nominees : " 0 "} Votes
+
+                </div>
+              </div>
+              {/* end-mobile */}
+
+              {/* web */}
+              <div className=" lg:flex lg:flex-col lg:w-auto hidden">
                 <div class="flex flex-row  border border-gray-200 mx-3 rounded-lg p-2">
                   <div className=' w-4/12  text-right '>
 
@@ -254,13 +225,34 @@ const Voting = (props) => {
                 <div>03</div>
               </div>
 
-              {/* 
-              <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
+              {/* end-web */}
+
+              {/* mobile */}
+              <div className='lg:hidden flex flex-col '>
+                <div class="flex flex-col  border border-gray-200 mx-3 rounded-lg p-2 text-xs">
+                  <div>
+                    asd
+                  </div>
+                  <div>
+                    <div className='flex flex-row  justify-center items-center '>
+                      <div className='mr-2 text-blue-600  font-bold'>122</div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `60%` }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    Hathairat Jaroenkanjanapaisan
+                  </div>
+                  <div>
+                    หทัยรัตน์ เจริญกาญจนไพศาล
+                  </div>
+                </div>
+
+              </div>
+              {/* end-mobile */}
 
 
-
-
-              </div> */}
 
             </div>
           </div>

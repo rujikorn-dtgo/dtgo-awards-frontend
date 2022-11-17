@@ -230,15 +230,38 @@ select {
 }
 
 @media only screen and (max-width: 1280px) and (min-width: 1020px) {
+  /* .resize-img {
+    max-height: 130px;
+    min-height: 130px;
+  }
+
+  .myimg {
+    width: 90%;
+    margin: auto;
+  
+  } */
+  
   .resize-img {
+    max-height: 100px;
+    min-height: 100px;
+  }
+
+  .myimg {
+    width: 75%;
+    margin: auto;
+  
+  }
+
+  /* .resize-img {
     max-height: 140px;
     min-height: 140px;
-  }
+  } */
 
   .resize-img-voting {
     max-height: 80px;
     min-height: 80px;
   }
+
 }
 
 /* mobile */
