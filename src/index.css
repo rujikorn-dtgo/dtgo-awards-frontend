@@ -262,6 +262,9 @@ select {
     min-height: 80px;
   }
 
+  .ipad-mx {
+    margin-left: 10px
+  }
 }
 
 /* mobile */
@@ -278,9 +281,12 @@ select {
   }
 
   .resize-img-voting {
-    max-height: 108px;
-    min-width: 108px;
+    max-height: 90px;
+    min-width: 90px;
+    margin: auto;
   }
+
+
 
   .myimg {
     width: 60%;

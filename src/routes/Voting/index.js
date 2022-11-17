@@ -231,7 +231,7 @@ const Voting = (props) => {
                       {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
 
                     </div>
-                    <div className='flex flex-col text-xs text-left w-full'>
+                    <div className='flex flex-col text-xs text-left w-full ipad-mx'>
                       <div className='mt-2 h-full'>
                         {p.nameEn}
                       </div>
@@ -320,7 +320,7 @@ const Voting = (props) => {
                       </div>
                     </div>
                     <div className='mt-2'>
-                      {p.nameEh}
+                      {p.nameEn}
                     </div>
                     <div className='my-2'>
                       {p.nameTh}
@@ -381,7 +381,7 @@ const Voting = (props) => {
                       {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
 
                     </div>
-                    <div className='flex flex-col text-xs text-left w-full'>
+                    <div className='flex flex-col text-xs text-left w-full ipad-mx'>
                       <div className='mt-2 h-full'>
                         {p.nameEn}
                       </div>
