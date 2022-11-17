@@ -256,7 +256,7 @@ const Voting = (props) => {
 
                             {/* = {((100 / blooming_gen.votes) * p.totalVote)+"%"}  */}
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
                             {/* <div className="bg-blue-600  h-2.5 rounded-full" style={{ width: `${((100 / blooming_gen.votes) * p.totalVote)}` }}></div> */}
                             <div className="bg-blue-600  h-2.5 rounded-full" style={{
                               width: `${((100 / blooming_gen.votes) * p.totalVote) + "%"} `,
@@ -305,7 +305,7 @@ const Voting = (props) => {
                                     : index + 1 == 5 ? "#EFACFF"
                                       : "C69F83"
                         }}>{p.totalVote}</div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
                           <div className="bg-blue-600 h-2.5 rounded-full" style={{
                             width: `${((100 / blooming_gen.votes) * p.totalVote) + "%"} `,
                             backgroundColor:
@@ -406,7 +406,7 @@ const Voting = (props) => {
 
                             {/* = {((100 / blooming_gen.votes) * p.totalVote)+"%"}  */}
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
                             {/* <div className="bg-blue-600  h-2.5 rounded-full" style={{ width: `${((100 / blooming_gen.votes) * p.totalVote)}` }}></div> */}
                             <div className="bg-blue-600  h-2.5 rounded-full" style={{
                               width: `${((100 / growing_gen.votes) * p.totalVote) + "%"} `,
@@ -454,7 +454,7 @@ const Voting = (props) => {
                                     : index + 1 == 5 ? "#EFACFF"
                                       : "C69F83"
                         }}>{p.totalVote}</div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
                           <div className="bg-blue-600 h-2.5 rounded-full" style={{
                             width: `${((100 / growing_gen.votes) * p.totalVote) + "%"} `,
                             backgroundColor:
