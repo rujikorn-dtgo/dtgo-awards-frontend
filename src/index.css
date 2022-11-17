@@ -240,7 +240,7 @@ select {
     margin: auto;
   
   } */
-  
+
   .resize-img {
     max-height: 100px;
     min-height: 100px;
@@ -249,7 +249,7 @@ select {
   .myimg {
     width: 75%;
     margin: auto;
-  
+
   }
 
   /* .resize-img {
@@ -295,8 +295,9 @@ select {
   }
 
   .resize-img-voting {
-    max-height: 108px;
-    min-width: 108px;
+    max-height: 90px;
+    min-width: 90px;
+    margin: auto;
   }
 }
 

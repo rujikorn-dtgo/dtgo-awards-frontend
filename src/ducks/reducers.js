@@ -8,6 +8,7 @@ import createRequest from './createRequest'
 import checkUpRequest from './CheckupRequest'
 import NoMinees from './NoMinees'
 
+
 export default combineReducers({
   app,
   form: formReducer,
@@ -15,6 +16,7 @@ export default combineReducers({
   todo,
   createRequest,
   checkUpRequest,
-  NoMinees
+  NoMinees,
+
 
 })
