@@ -50,7 +50,7 @@ const Voting = (props) => {
   const goNomineesPage = async (e, name) => {
 
     await getNomineesPage(e)
-    // await getVotingPage(e)
+    await getVotingPage(e)
     setNumber(e)
 
 
@@ -320,10 +320,10 @@ const Voting = (props) => {
                       </div>
                     </div>
                     <div className='mt-2'>
-                    {p.nameEh}
+                      {p.nameEh}
                     </div>
                     <div className='my-2'>
-                    {p.nameTh}
+                      {p.nameTh}
                     </div>
                   </div>
                 ))
