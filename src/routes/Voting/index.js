@@ -8,7 +8,8 @@ import { Container } from './styled'
 
 
 import FooTer from 'components/FooTer'
-import { getChoiceAwards, getNomineesPage, getToken, genToken, con_date_now, con_datetime_now } from 'ducks/NoMinees'
+import { getChoiceAwards, getNomineesPage, getToken, genToken, con_date_now, con_datetime_now, getVotingPage } from 'ducks/NoMinees'
+
 
 const Voting = (props) => {
   // console.log(props, 'propsssss')
@@ -18,10 +19,12 @@ const Voting = (props) => {
     getNomineesPage,
     NoMineesData,
     getToken,
-    genToken
+    genToken,
+    getVotingPage,
+    VotingData
   } = props
-  console.log(NoMineesData, 'NoMineesDatalog')
-
+  // console.log(NoMineesData, 'NoMineesDatalog')
+  console.log(VotingData, "VoingData")
   const [datanominees, setdatanominees] = useState(""
   )
 
@@ -31,30 +34,28 @@ const Voting = (props) => {
   }
   )
   const [blooming_gen, setblooming_gen] = useState({
-    nominees: "",
-    nominators: ""
+    votes: ""
   }
 
   )
   const [bloming_detail, setbloming_detail] = useState([])
   const [growing_detail, setgrowing_detail] = useState([])
   const [growing_gen, setgrowing_gen] = useState({
-    nominees: "",
-    nominators: ""
+    votes: ""
   })
 
   const [number, setNumber] = useState(1)
 
 
   const goNomineesPage = async (e, name) => {
+
     await getNomineesPage(e)
+    await getVotingPage(e)
     setNumber(e)
 
 
 
   }
-
-
 
   useEffect(() => {
 
@@ -65,30 +66,39 @@ const Voting = (props) => {
     const chk1 = getChoiceAwards()
     console.log(chk1, 'chk1')
     getNomineesPage("1")
-
+    getVotingPage("1")
+    console.log(getVotingPage, 'getVotingPage')
 
 
   }, [])
-
   useEffect(() => {
 
 
     if (NoMineesData !== undefined && NoMineesData.length !== 0) {
-      console.log(NoMineesData, 'ef_NoMineesData')
-
-      blooming_gen.nominees = NoMineesData.bloomingGen.nominees
-      blooming_gen.nominators = NoMineesData.bloomingGen.nominators
-
-      growing_gen.nominees = NoMineesData.growingGen.nominees
-      growing_gen.nominators = NoMineesData.growingGen.nominators
 
       choice_detail.nameEn = NoMineesData.choiceDetail.nameEn
       choice_detail.nameTh = NoMineesData.choiceDetail.nameTh
       setchoice_detail({
         ...choice_detail
       })
-      setbloming_detail(NoMineesData.bloomingGen.nomineesDetails)
-      setgrowing_detail(NoMineesData.growingGen.nomineesDetails)
+
+    }
+  }, [NoMineesData])
+
+
+  useEffect(() => {
+
+
+    if (VotingData !== undefined && VotingData.length !== 0) {
+      console.log(VotingData, 'ef_VotingData')
+
+      blooming_gen.votes = VotingData.bloomingGen.votes
+
+
+      growing_gen.votes = VotingData.growingGen.votes
+
+      setbloming_detail(VotingData.bloomingGen.listOfVoted)
+      setgrowing_detail(VotingData.growingGen.listOfVoted)
       setblooming_gen({
         ...blooming_gen
       })
@@ -96,7 +106,9 @@ const Voting = (props) => {
         ...growing_gen
       })
     }
-  }, [NoMineesData])
+  }, [VotingData])
+
+
 
   const refresh = () => {
     const timer = setTimeout(() => {
@@ -136,7 +148,21 @@ const Voting = (props) => {
 
         </div>
 
+        {/* mobile */}
+        <div className='mx-4 mb-4 lg:hidden '>
+          <select className='w-full bg-white border-yellow  h-11 rounded-full  pl-5 pr-3  outline-none text-yellow text-base ' onChange={(e) => goNomineesPage(e.target.value)} >
+            {ChoiceAwardsData ? ChoiceAwardsData.map((p, index) => (
+              <option value={p.no} className=' broder-2 border-yellow'>{p.no}. {p.name}
+              </option>
+            ))
+              :
+              ""}
 
+          </select>
+
+
+        </div>
+        {/* end-mobile */}
 
         <div className='  w-full  h-max flex font-db-helvethaica '>
           {/* web */}
@@ -173,7 +199,7 @@ const Voting = (props) => {
               <div className=' lg:flex hidden  w-full my-5 text-xs font-bold text-brown  text-center      '>
 
                 <div className='flex-col text-center  w-full 2xl:mx-60   lg:mx-28   bg-gray-200 rounded-full pl-3 py-2 '>
-                  {blooming_gen.nominees ? blooming_gen.nominees : " 0 "} Votes
+                  {blooming_gen.votes ? blooming_gen.votes : " 0 "} Votes
 
                 </div>
 
@@ -186,7 +212,7 @@ const Voting = (props) => {
               <div className='  flex  w-full my-5 text-xs font-bold text-brown  text-center   lg:hidden     '>
 
                 <div className='flex-col text-center  w-full mx-10   bg-gray-200 rounded-full pl-3 py-2 '>
-                  {blooming_gen.nominees ? blooming_gen.nominees : " 0 "} Votes
+                  {blooming_gen.votes ? blooming_gen.votes : " 0 "} Votes
 
                 </div>
               </div>
@@ -194,60 +220,117 @@ const Voting = (props) => {
 
               {/* web */}
               <div className=" lg:flex lg:flex-col lg:w-auto hidden">
-                <div class="flex flex-row  border border-gray-200 mx-3 rounded-lg p-2">
-                  <div className=' w-4/12  text-right '>
+                {console.log(bloming_detail, 'bloming_detail')}
 
-                    <img className=" resize-img-voting rounded-full    object-fill   " src="https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg" alt="img" />
-                    {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
+                {bloming_detail ? bloming_detail.map((p, index) => (
+                  <div class="flex flex-row  border border-gray-200 mx-3 my-1 rounded-lg p-2">
 
+                    <div className=' w-4/12  text-right '>
 
-                  </div>
-                  <div className='flex flex-col text-xs text-left w-full'>
-                    <div className='mt-2 h-full'>
-                      Hathairat Jaroenkanjanapaisan
+                      <img className=" resize-img-voting rounded-full    object-fill   " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg"} alt="img" />
+                      {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
+
                     </div>
-                    <div className='my-2 h-full'>
-                      หทัยรัตน์ เจริญกาญจนไพศาล
-                    </div>
-                    <div className='mb-2 h-full'>
-                      <div className='flex flex-row  justify-center items-center '>
-                        <div className='mr-2 text-blue-600  font-bold'>122</div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `60%` }}></div>
+                    <div className='flex flex-col text-xs text-left w-full ipad-mx'>
+                      <div className='mt-2 h-full'>
+                        {p.nameEn}
+                      </div>
+                      <div className='my-2 h-full'>
+                        {p.nameTh}
+                      </div>
+                      <div className='mb-2 h-full'>
+                        <div className='flex flex-row  justify-center items-center '>
+
+
+                          <div className='mr-2 text-blue-600  font-bold' style={{
+                            color:
+                              index + 1 == 1 ? "#D963B0"
+                                : index + 1 == 2 ? "#FF993C"
+                                  : index + 1 == 3 ? "#71B8F7"
+                                    : index + 1 == 4 ? "#B9DD4A"
+                                      : index + 1 == 5 ? "#EFACFF"
+                                        : "C69F83"
+                          }}>{p.totalVote}
+
+
+
+                            {/* = {((100 / blooming_gen.votes) * p.totalVote)+"%"}  */}
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
+                            {/* <div className="bg-blue-600  h-2.5 rounded-full" style={{ width: `${((100 / blooming_gen.votes) * p.totalVote)}` }}></div> */}
+                            <div className="bg-blue-600  h-2.5 rounded-full" style={{
+                              width: `${((100 / blooming_gen.votes) * p.totalVote) + "%"} `,
+                              backgroundColor:
+                                index + 1 == 1 ? "#D963B0"
+                                  : index + 1 == 2 ? "#FF993C"
+                                    : index + 1 == 3 ? "#71B8F7"
+                                      : index + 1 == 4 ? "#B9DD4A"
+                                        : index + 1 == 5 ? "#EFACFF"
+                                          : "C69F83"
+                            }}></div>
+                            {/* <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${p.totalVote}` }}></div> */}
+                          </div>
                         </div>
                       </div>
-
                     </div>
-                  </div>
 
-                </div>
-                <div>02</div>
-                <div>03</div>
+                  </div>
+                ))
+                  :
+                  ""}
+
               </div>
 
               {/* end-web */}
 
               {/* mobile */}
               <div className='lg:hidden flex flex-col '>
-                <div class="flex flex-col  border border-gray-200 mx-3 rounded-lg p-2 text-xs">
-                  <div>
-                    asd
-                  </div>
-                  <div>
-                    <div className='flex flex-row  justify-center items-center '>
-                      <div className='mr-2 text-blue-600  font-bold'>122</div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `60%` }}></div>
+
+                {bloming_detail ? bloming_detail.map((p, index) => (
+                  <div class="flex flex-col  border border-gray-200 mx-3 rounded-lg p-2 text-xs">
+                    <div className=' w-full mb-2 text-right '>
+
+                      <img className=" resize-img-voting rounded-full    object-fill   " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg"} alt="img" />
+                      {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
+
+                    </div>
+                    <div>
+                      <div className='flex flex-row  justify-center items-center '>
+                        <div className='mr-2 text-blue-600  font-bold' style={{
+                          color:
+                            index + 1 == 1 ? "#D963B0"
+                              : index + 1 == 2 ? "#FF993C"
+                                : index + 1 == 3 ? "#71B8F7"
+                                  : index + 1 == 4 ? "#B9DD4A"
+                                    : index + 1 == 5 ? "#EFACFF"
+                                      : "C69F83"
+                        }}>{p.totalVote}</div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
+                          <div className="bg-blue-600 h-2.5 rounded-full" style={{
+                            width: `${((100 / blooming_gen.votes) * p.totalVote) + "%"} `,
+                            backgroundColor:
+                              index + 1 == 1 ? "#D963B0"
+                                : index + 1 == 2 ? "#FF993C"
+                                  : index + 1 == 3 ? "#71B8F7"
+                                    : index + 1 == 4 ? "#B9DD4A"
+                                      : index + 1 == 5 ? "#EFACFF"
+                                        : "C69F83"
+                          }}></div>
+                        </div>
                       </div>
                     </div>
+                    <div className='mt-2'>
+                      {p.nameEn}
+                    </div>
+                    <div className='my-2'>
+                      {p.nameTh}
+                    </div>
                   </div>
-                  <div>
-                    Hathairat Jaroenkanjanapaisan
-                  </div>
-                  <div>
-                    หทัยรัตน์ เจริญกาญจนไพศาล
-                  </div>
-                </div>
+                ))
+                  :
+                  ""}
+
+
 
               </div>
               {/* end-mobile */}
@@ -264,24 +347,144 @@ const Voting = (props) => {
                 </div>
               </div>
             </div>
-
-            <div className='mt-10 h-full mb-20'>
+            <div className='lg:mt-10 my-2 h-full mb-20'>
               {/* web */}
               <div className=' lg:flex hidden  w-full my-5 text-xs font-bold text-brown  text-center      '>
 
                 <div className='flex-col text-center  w-full 2xl:mx-60   lg:mx-28   bg-gray-200 rounded-full pl-3 py-2 '>
-                  {growing_gen.nominees ? growing_gen.nominees : " 0 "} Votes
+                  {growing_gen.votes ? growing_gen.votes : " 0 "} Votes
 
                 </div>
 
-
               </div>
+
               {/* end-web */}
 
-              <div className='  grid lg:grid-cols-2   grid-cols-1  h-auto  text-xs  ml-7   '>
+              {/* mobile */}
+              <div className='  flex  w-full my-5 text-xs font-bold text-brown  text-center   lg:hidden     '>
+
+                <div className='flex-col text-center  w-full mx-10   bg-gray-200 rounded-full pl-3 py-2 '>
+                  {growing_gen.votes ? growing_gen.votes : " 0 "} Votes
+
+                </div>
+              </div>
+              {/* end-mobile */}
+
+              {/* web */}
+              <div className=" lg:flex lg:flex-col lg:w-auto hidden">
+                {growing_detail ? growing_detail.map((p, index) => (
+                  <div class="flex flex-row  border border-gray-200 mx-3 my-1 rounded-lg p-2">
+
+                    <div className=' w-4/12  text-right '>
+
+                      <img className=" resize-img-voting rounded-full    object-fill   " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg"} alt="img" />
+                      {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
+
+                    </div>
+                    <div className='flex flex-col text-xs text-left w-full ipad-mx'>
+                      <div className='mt-2 h-full'>
+                        {p.nameEn}
+                      </div>
+                      <div className='my-2 h-full'>
+                        {p.nameTh}
+                      </div>
+                      <div className='mb-2 h-full'>
+                        <div className='flex flex-row  justify-center items-center '>
+
+
+                          <div className='mr-2 text-blue-600  font-bold' style={{
+                            color:
+                              index + 1 == 1 ? "#D963B0"
+                                : index + 1 == 2 ? "#FF993C"
+                                  : index + 1 == 3 ? "#71B8F7"
+                                    : index + 1 == 4 ? "#B9DD4A"
+                                      : index + 1 == 5 ? "#EFACFF"
+                                        : "C69F83"
+                          }}>{p.totalVote}
+
+
+
+                            {/* = {((100 / blooming_gen.votes) * p.totalVote)+"%"}  */}
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
+                            {/* <div className="bg-blue-600  h-2.5 rounded-full" style={{ width: `${((100 / blooming_gen.votes) * p.totalVote)}` }}></div> */}
+                            <div className="bg-blue-600  h-2.5 rounded-full" style={{
+                              width: `${((100 / growing_gen.votes) * p.totalVote) + "%"} `,
+                              backgroundColor:
+                                index + 1 == 1 ? "#D963B0"
+                                  : index + 1 == 2 ? "#FF993C"
+                                    : index + 1 == 3 ? "#71B8F7"
+                                      : index + 1 == 4 ? "#B9DD4A"
+                                        : index + 1 == 5 ? "#EFACFF"
+                                          : "C69F83"
+                            }}></div>
+                            {/* <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${p.totalVote}` }}></div> */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                ))
+                  :
+                  ""}
+              </div>
+
+              {/* end-web */}
+
+              {/* mobile */}
+              <div className='lg:hidden flex flex-col '>
+
+                {growing_detail ? growing_detail.map((p, index) => (
+                  <div class="flex flex-col  border border-gray-200 mx-3 rounded-lg p-2 text-xs">
+                    <div className=' w-full mb-2 text-right '>
+
+                      <img className=" resize-img-voting rounded-full    object-fill   " src={p.picUrl !== null ? p.picUrl : "https://sv1.picz.in.th/images/2022/11/09/vV9j02.jpg"} alt="img" />
+                      {/* <img className="cornerimage  " src="https://rfid.koder3.com/mask.png" alt="" /> */}
+
+                    </div>
+                    <div>
+                      <div className='flex flex-row  justify-center items-center '>
+                        <div className='mr-2 text-blue-600  font-bold' style={{
+                          color:
+                            index + 1 == 1 ? "#D963B0"
+                              : index + 1 == 2 ? "#FF993C"
+                                : index + 1 == 3 ? "#71B8F7"
+                                  : index + 1 == 4 ? "#B9DD4A"
+                                    : index + 1 == 5 ? "#EFACFF"
+                                      : "C69F83"
+                        }}>{p.totalVote}</div>
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
+                          <div className="bg-blue-600 h-2.5 rounded-full" style={{
+                            width: `${((100 / growing_gen.votes) * p.totalVote) + "%"} `,
+                            backgroundColor:
+                              index + 1 == 1 ? "#D963B0"
+                                : index + 1 == 2 ? "#FF993C"
+                                  : index + 1 == 3 ? "#71B8F7"
+                                    : index + 1 == 4 ? "#B9DD4A"
+                                      : index + 1 == 5 ? "#EFACFF"
+                                        : "C69F83"
+                          }}></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='mt-2'>
+                      {p.nameEn}
+                    </div>
+                    <div className='my-2'>
+                      {p.nameTh}
+                    </div>
+                  </div>
+                ))
+                  :
+                  ""}
+
 
 
               </div>
+              {/* end-mobile */}
+
+
 
             </div>
           </div>
@@ -304,11 +507,12 @@ const mapStateToProps = (state) => {
   // var valueForm = getFormValues('formName')(state)
   console.log(state, 'state')
   console.log(state.NoMinees.NoMineesData.data, 'NoMinees')
-
+  console.log(state.NoMinees.VotingData.data, 'VotingData')
   return {
     //initial value form  
     ChoiceAwardsData: state.NoMinees.ChoiceAwardsData.data,
-    NoMineesData: state.NoMinees.NoMineesData.data
+    NoMineesData: state.NoMinees.NoMineesData.data,
+    VotingData: state.NoMinees.VotingData.data
     // valueForm,
 
 
@@ -319,7 +523,8 @@ const mapDispatchToProps = {
   getChoiceAwards,
   getNomineesPage,
   getToken,
-  genToken
+  genToken,
+  getVotingPage
   // getComplainAll
 }
 

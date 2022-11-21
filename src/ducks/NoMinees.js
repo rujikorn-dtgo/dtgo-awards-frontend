@@ -85,19 +85,69 @@ const GET_CHOICE_AWARDS = makeKeys('GET_CHOICE_AWARDS');
 const GET_NOMINEES_PAGE = makeKeys('GET_NOMINEE_PAGE');
 const GET_TOKEN = makeKeys('GET_TOKEN');
 const GEN_TOKEN = makeKeys('GEN_TOKEN');
+const GET_VOTING_PAGE = makeKeys('GET_VOTING_PAGE');
 
 export const getChoiceAwards = makeAction(GET_CHOICE_AWARDS.REQUEST, 'data')
 export const getNomineesPage = makeAction(GET_NOMINEES_PAGE.REQUEST, 'id')
 export const getToken = makeAction(GET_TOKEN.REQUEST, 'data')
 export const genToken = makeAction(GEN_TOKEN.REQUEST, 'data')
+export const getVotingPage = makeAction(GET_VOTING_PAGE.REQUEST, 'id')
 
 const getChoiceAwardsSuccess = makeAction(GET_CHOICE_AWARDS.SUCCESS, 'data')
 const getNomineesPageSuccess = makeAction(GET_NOMINEES_PAGE.SUCCESS, 'data')
-
+const getVotingPageSuccess = makeAction(GET_VOTING_PAGE.SUCCESS, 'data')
 
 const basePath = path => path ? `basePath/${path}` : 'basePath' // config api path
 const multipartHeader = { 'Content-Type': 'multipart/form-data', } //multipart for API upload file
 
+
+function* getVotingPageRequest(action) {
+  const { id } = action.payload
+  console.log(id)
+
+  try {
+    const response = yield httpGet(`/dtgo_award_api/voting_page?choice_awards=${id}`)
+    if (response.status >= 200 && response.status < 300) {
+      //on success
+      yield put(getVotingPageSuccess(response.data))
+    } else {
+      //on fail
+      yield put(getVotingPageSuccess({}))
+    }
+  } catch (e) {
+    if (e.status == 500) {
+      try {
+        const response__ = yield httpGet(`/dtgo_award_api/access/oauth/token?type=get_client_credentials`)
+        if (response__.status >= 200 && response__.status < 300) {
+          // //on success
+          // const date_stamp = con_date_now(response__.data.timeStamp)
+          const date_stamp = response__.data.timeStamp
+          // console.log(date, 'date')
+
+          console.log(response__.data, 'response__.data')
+
+          localStorage.setItem('date_stamp', date_stamp)
+          localStorage.setItem('access_token', response__.data.accessToken)
+          console.log(localStorage.getItem('access_token'), 'access')
+          // yield put(getChoiceAwardsSuccess(response.data))
+          refresh()
+        } else {
+          //on fail
+          console.log("fail")
+          // yield put(getChoiceAwardsSuccess({}))
+        }
+      } catch (e) {
+        //on fail
+        console.log(e)
+        // yield put(getChoiceAwardsSuccess({}))
+      }
+    } else {
+      console.log(e)
+    }
+    console.log(e)
+    yield put(getVotingPageSuccess({}))
+  }
+}
 
 function* getNoMineesPageRequest(action) {
   const { id } = action.payload
@@ -147,6 +197,8 @@ function* getNoMineesPageRequest(action) {
   }
 }
 
+
+
 function* getTokenRequest() {
   // const { data } = action.payload
   // console.log(data, 'getTokenRequest',)
@@ -167,7 +219,7 @@ function* getTokenRequest() {
       localStorage.setItem('access_token', response.data.accessToken)
       console.log(localStorage.getItem('access_token'), 'access')
       // yield put(getChoiceAwardsSuccess(response.data))
-      
+
     } else {
       //on fail
       console.log("fail")
@@ -266,11 +318,13 @@ export function* watchNoMineesSaga() {
   yield takeLatest(GET_NOMINEES_PAGE.REQUEST, getNoMineesPageRequest)
   yield takeLatest(GET_TOKEN.REQUEST, getTokenRequest)
   yield takeLatest(GEN_TOKEN.REQUEST, genTokenRequest)
+  yield takeLatest(GET_VOTING_PAGE.REQUEST, getVotingPageRequest)
 }
 
 const initial = {
   ChoiceAwardsData: { data: [], loading: false },
   NoMineesData: { data: [], loading: false },
+  VotingData: { data: [], loading: false },
 }
 
 export default createReducer(initial, state => ({
@@ -292,6 +346,15 @@ export default createReducer(initial, state => ({
   [GET_NOMINEES_PAGE.SUCCESS]: (payload) => ({
     ...state,
     NoMineesData: { data: payload.data, loading: false }
+  }),
+  [GET_VOTING_PAGE.REQUEST]: () => ({
+    ...state,
+    VotingData: { data: [], loading: true }
+  }),
+
+  [GET_VOTING_PAGE.SUCCESS]: (payload) => ({
+    ...state,
+    VotingData: { data: payload.data, loading: false }
   })
 }))
 

@@ -10,6 +10,7 @@ import { watchCreateRequestSaga } from './createRequest'
 import { watchCheckUpRequestSaga } from './CheckupRequest'
 import { watchNoMineesSaga } from './NoMinees'
 
+
 export const configureStore = initialState => {
   const saga = createSagaMiddleware()
   const middlewares = [saga]
@@ -27,6 +28,7 @@ export const configureStore = initialState => {
       // watchCreateRequestSaga(),
       // watchCheckUpRequestSaga(),
       watchNoMineesSaga()
+  
     ])
   }
   saga.run(rootSaga)
