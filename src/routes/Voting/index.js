@@ -36,8 +36,12 @@ const Voting = (props) => {
   const [blooming_gen, setblooming_gen] = useState({
     votes: ""
   }
-
   )
+  const [allvote, setallvote] = useState(""
+  )
+
+
+
   const [bloming_detail, setbloming_detail] = useState([])
   const [growing_detail, setgrowing_detail] = useState([])
   const [growing_gen, setgrowing_gen] = useState({
@@ -99,6 +103,7 @@ const Voting = (props) => {
 
       setbloming_detail(VotingData.bloomingGen.listOfVoted)
       setgrowing_detail(VotingData.growingGen.listOfVoted)
+      setallvote(VotingData.allVoted)
       setblooming_gen({
         ...blooming_gen
       })
@@ -135,6 +140,10 @@ const Voting = (props) => {
 
         <div className='text-center ui-text-color-award   lg:text-3xl text-2xl  my-4 text-red'>
           Real Time : Voting Results <br className='lg:hidden'></br> For DTGO AWARDS 2022
+          <br>
+
+          </br>
+          All Vote : {allvote}
         </div>
 
         <div className='text-center   font-db-helvethaica  lg:text-base text-xs mb-6 '>
