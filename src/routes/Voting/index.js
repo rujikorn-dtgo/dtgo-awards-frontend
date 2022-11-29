@@ -508,7 +508,12 @@ const Voting = (props) => {
     //   </FooTer>
     // </Container >
     <Container>
-      <div className='flex items-center h-full lg:text-xl text-base'>
+
+      <img src="https://sv1.picz.in.th/images/2022/10/17/pyDxo0.png" className='lg:block   hidden w-full' />
+
+      <img src="https://sv1.picz.in.th/images/2022/10/21/vz3cha.png" className='block  lg:hidden w-full' />
+      <div className='flex items-center lg:text-xl text-base mt-10'>
+
         <div className="flex justify-center  center  mx-voting ">
           SORRY! <br></br>
           This page is temporarily unavailable, Let's follow the Voting of DTGO 2022
