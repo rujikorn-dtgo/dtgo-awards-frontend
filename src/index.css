@@ -227,6 +227,10 @@ select {
     max-height: 140px;
     min-height: 140px;
   }
+
+  .mx-voting {
+    margin: auto;
+  }
 }
 
 @media only screen and (max-width: 1280px) and (min-width: 1020px) {
@@ -265,6 +269,10 @@ select {
   .ipad-mx {
     margin-left: 10px
   }
+
+  .mx-voting {
+    margin: auto;
+  }
 }
 
 /* mobile */
@@ -292,6 +300,10 @@ select {
     width: 60%;
     margin: auto;
   }
+
+  .mx-voting {
+    margin: auto;
+  }
 }
 
 @media only screen and (max-width: 640px) {
@@ -304,6 +316,10 @@ select {
     max-height: 90px;
     min-width: 90px;
     margin: auto;
+  }
+
+  .mx-voting {
+    margin: 16px
   }
 }
 
