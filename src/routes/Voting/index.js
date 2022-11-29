@@ -509,7 +509,7 @@ const Voting = (props) => {
     // </Container >
     <Container>
       <div className='flex items-center h-full lg:text-xl text-base'>
-        <div className="flex justify-center  center  mx-4">
+        <div className="flex justify-center  center  mx-voting ">
           SORRY! <br></br>
           This page is temporarily unavailable, Let's follow the Voting of DTGO 2022
         </div>
